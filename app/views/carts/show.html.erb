@@ -1,0 +1,30 @@
+<%= link_to "← Keep shopping", root_path %>
+
+<h1>Your cart</h1>
+
+<% if @items.any? %>
+  <table class="cart-table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= link_to item[:product].name, item[:product] %></td>
+          <td><%= number_to_currency(item[:product].price) %></td>
+          <td><%= item[:quantity] %></td>
+          <td><%= number_to_currency(item[:product].price * item[:quantity]) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <p class="cart-total">Total: <%= number_to_currency(@total) %></p>
+<% else %>
+  <p>Your cart is empty.</p>
+<% end %>

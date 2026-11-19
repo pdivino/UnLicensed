@@ -1,0 +1,22 @@
+<%# Partial: top menu shown on every store page. Lists every category (rubric 2.2). %>
+<header class="site-header">
+  <%= link_to "UnLicensed", root_path, class: "logo" %>
+  <nav>
+    <%= link_to "All", root_path %>
+    <% @menu_categories.each do |category| %>
+      <%= link_to category.name, category_path(category) %>
+    <% end %>
+    <%# Cart link with the number of items from the session. %>
+    <%= link_to "Cart (#{cart_count})", cart_path, class: "cart-link" %>
+  </nav>
+</header>
+
+<%# Search form: keyword + category dropdown (rubric 2.6). method: :get puts the search in the address bar. %>
+<%= form_with url: search_path, method: :get, class: "search-form" do %>
+  <%= text_field_tag :keyword, params[:keyword], placeholder: "Search products..." %>
+  <%# The blank option "All categories" searches every category. %>
+  <%= select_tag :category_id,
+        options_from_collection_for_select(@menu_categories, :id, :name, params[:category_id]),
+        include_blank: "All categories" %>
+  <%= submit_tag "Search", name: nil %>
+<% end %>

@@ -1,0 +1,25 @@
+<%= link_to "← Back to all products", root_path %>
+
+<h1>Search results</h1>
+
+<p>
+  <% if @keyword.present? %>
+    Showing results for "<%= @keyword %>"
+  <% else %>
+    Showing all products
+  <% end %>
+  <% if @category %>
+    in <%= @category.name %>
+  <% end %>
+  (<%= @products.total_count %> found)
+</p>
+
+<% if @products.any? %>
+  <div class="product-grid">
+    <%# Same product card partial as the front page. %>
+    <%= render @products %>
+  </div>
+  <%= paginate @products %>
+<% else %>
+  <p>No products matched your search.</p>
+<% end %>

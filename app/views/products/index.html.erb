@@ -1,0 +1,10 @@
+<h1>UnLicensed</h1>
+<p>Workwear-inspired clothing, made in Winnipeg.</p>
+
+<div class="product-grid">
+  <%# render @products uses the _product partial once for each product. %>
+  <%= render @products %>
+</div>
+
+<%# Next / Previous page links (Kaminari, rubric 2.5). %>
+<%= paginate @products %>

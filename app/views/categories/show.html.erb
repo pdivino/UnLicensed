@@ -1,0 +1,11 @@
+<%= link_to "← Back to all products", root_path %>
+
+<h1><%= @category.name %></h1>
+
+<div class="product-grid">
+  <%# Same product card partial as the front page. %>
+  <%= render @products %>
+</div>
+
+<%# Next / Previous page links (Kaminari). %>
+<%= paginate @products %>

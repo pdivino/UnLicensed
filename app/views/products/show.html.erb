@@ -1,0 +1,19 @@
+<%= link_to "← Back to all products", root_path %>
+
+<div class="product-detail">
+  <% if @product.image.attached? %>
+    <%= image_tag @product.image, alt: @product.name %>
+  <% end %>
+
+  <div>
+    <h1><%= @product.name %></h1>
+    <p class="category"><%= @product.category.name %></p>
+    <p class="price"><%= number_to_currency(@product.price) %></p>
+    <% if @product.on_sale %>
+      <p class="sale">On sale!</p>
+    <% end %>
+    <p><%= @product.description %></p>
+    <p>In stock: <%= @product.stock_quantity %></p>
+    <%= button_to "Add to cart", add_to_cart_path(@product), class: "add-button" %>
+  </div>
+</div>

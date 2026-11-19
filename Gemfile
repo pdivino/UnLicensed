@@ -55,9 +55,12 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
 # Admin dashboard (rubric 1.1, 1.2). Version 3 works with Rails 7.2.
 gem "activeadmin", "~> 3.2"
 # Handles admin login with an email and hashed password.
 gem "devise"
 # Lets Rails read ActiveAdmin's SCSS styles.
 gem "sassc-rails"
+# Splits product lists into pages with Next/Previous links (rubric 2.5).
+gem "kaminari"
