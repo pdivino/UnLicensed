@@ -1,0 +1,56 @@
+<h1>Checkout</h1>
+
+<h2>Your items</h2>
+<ul>
+  <% @items.each do |item| %>
+    <li>
+      <%= item[:quantity] %> x <%= item[:product].name %>
+      - <%= number_to_currency(item[:product].price * item[:quantity]) %>
+    </li>
+  <% end %>
+</ul>
+<p><strong>Subtotal: <%= number_to_currency(@subtotal) %></strong>
+  (tax is added on your invoice, based on your province)</p>
+
+<h2>Delivery details</h2>
+
+<% if @customer.errors.any? %>
+  <div class="form-errors">
+    <p>Please fix the following:</p>
+    <ul>
+      <% @customer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: @customer, url: orders_path do |form| %>
+  <p>
+    <%= form.label :name, "Full name" %><br>
+    <%= form.text_field :name %>
+  </p>
+  <p>
+    <%= form.label :email %><br>
+    <%= form.email_field :email %>
+  </p>
+  <p>
+    <%= form.label :address, "Street address" %><br>
+    <%= form.text_field :address %>
+  </p>
+  <p>
+    <%= form.label :city %><br>
+    <%= form.text_field :city %>
+  </p>
+  <p>
+    <%= form.label :postal_code, "Postal code" %><br>
+    <%= form.text_field :postal_code %>
+  </p>
+  <p>
+    <%= form.label :province_id, "Province" %><br>
+    <%= form.collection_select :province_id, @provinces, :id, :name,
+                               { prompt: "Choose a province" } %>
+  </p>
+
+  <%= form.submit "Place order" %>
+<% end %>
