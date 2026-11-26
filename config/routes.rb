@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   get "cart", to: "carts#show", as: :cart
   post "cart/add/:id", to: "carts#add", as: :add_to_cart
+  patch "cart/update/:id", to: "carts#update", as: :update_cart_item
+  delete "cart/remove/:id", to: "carts#remove", as: :remove_cart_item
 
   # Checkout: fill in the address form, place the order, see the invoice.
   get "checkout", to: "orders#new", as: :checkout
